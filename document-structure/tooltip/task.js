@@ -1,18 +1,24 @@
 const tooltips = document.querySelectorAll('.has-tooltip');
-
+let activeTooltip = null;
 
 tooltips.forEach((tooltip) => {
   tooltip.addEventListener('click', (e) => {
     e.preventDefault();
     
-    const activeTooltips = document.querySelectorAll('.tooltip_active');
+    const selectedTooltip = tooltip.getAttribute('title');
     
-    activeTooltips.forEach((activeTooltip) => {
+    if (activeTooltip && activeTooltip.textContent === selectedTooltip) {
       activeTooltip.classList.remove('tooltip_active');
       activeTooltip.remove();
-    });
+      activeTooltip = null;
+      return;
+    }
     
-    const selectedTooltip = tooltip.getAttribute('title');
+    if (activeTooltip) {
+      activeTooltip.classList.remove('tooltip_active');
+      activeTooltip.remove();
+    }
+    
     const tooltipText = document.createElement('div');
     tooltipText.classList.add('tooltip');
     tooltipText.textContent = selectedTooltip;
@@ -25,9 +31,6 @@ tooltips.forEach((tooltip) => {
     
     tooltipText.classList.add('tooltip_active');
     
-    setTimeout(() => {
-      tooltipText.classList.remove('tooltip_active');
-      tooltipText.remove();
-    }, 1000);
+    activeTooltip = tooltipText;
   });
 });
