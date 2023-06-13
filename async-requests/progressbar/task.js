@@ -9,7 +9,7 @@ form.addEventListener('submit', (e) => {
 
   
   xhr.upload.addEventListener('progress', (e) => {
-    progress.value = (e.loaded / e.total) * 100
+    progress.value = e.loaded / e.total;
   });
 
   xhr.upload.addEventListener('load', () => {
