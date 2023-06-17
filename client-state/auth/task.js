@@ -32,11 +32,11 @@ signinForm.addEventListener('submit', (e) => {
         alert('Неверный логин/пароль');
         form.reset();
     }
-
+  });
+  
   xhr.open('POST', 'https://students.netoservices.ru/nestjs-backend/auth');
   xhr.responseType = 'json';
-  xhr.send(formData);
-  });
+  xhr.send(formData);  
 });
 
 
